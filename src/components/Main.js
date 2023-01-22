@@ -41,6 +41,53 @@ class Main extends Component {
     };
   }
 
+  onAddEducation = () => {
+    const { educationValues } = this.state;
+
+    this.setState({
+      educationValues: educationValues.concat({
+        id: uniqid(),
+        nameOfDegree: "",
+        nameOfEducationalInstitution: "",
+        from: "",
+        to: "",
+        submission: false,
+      }),
+    });
+  };
+
+  onDeleteEducation = (id) => {
+    const { educationValues } = this.state;
+
+    this.setState({
+      educationValues: educationValues.filter((el) => el.id !== id),
+    });
+  };
+
+  onAddExperience = () => {
+    const { experienceValues } = this.state;
+
+    this.setState({
+      experienceValues: experienceValues.concat({
+        id: uniqid(),
+        jobTitle: "",
+        employer: "",
+        from: "",
+        to: "",
+        mainResponsibilities: "",
+        submission: false,
+      }),
+    });
+  };
+
+  onDeleteExperience = (id) => {
+    const { experienceValues } = this.state;
+
+    this.setState({
+      experienceValues: experienceValues.filter((el) => el.id !== id),
+    });
+  };
+
   onPersonalInfoChange = (e) => {
     const { name } = e.target;
     const { value } = e.target;
@@ -85,6 +132,51 @@ class Main extends Component {
           return {
             ...el,
             [name]: value,
+          };
+        }
+        return el;
+      }),
+    });
+  };
+
+  onPersonalInfoEdit = () => {
+    const { personalInfoValues } = this.state;
+
+    this.setState({
+      personalInfoValues: personalInfoValues.map((el) => {
+        return {
+          ...el,
+          submission: false,
+        };
+      }),
+    });
+  };
+
+  onEducationEdit = (id) => {
+    const { educationValues } = this.state;
+
+    this.setState({
+      educationValues: educationValues.map((el) => {
+        if (el.id === id) {
+          return {
+            ...el,
+            submission: false,
+          };
+        }
+        return el;
+      }),
+    });
+  };
+
+  onExperienceEdit = (id) => {
+    const { experienceValues } = this.state;
+
+    this.setState({
+      experienceValues: experienceValues.map((el) => {
+        if (el.id === id) {
+          return {
+            ...el,
+            submission: false,
           };
         }
         return el;
@@ -140,6 +232,7 @@ class Main extends Component {
         <PersonalInfo
           personalInfoValues={personalInfoValues}
           onPersonalInfoChange={this.onPersonalInfoChange}
+          onPersonalInfoEdit={this.onPersonalInfoEdit}
         />
         <h2>Education</h2>
         {educationValues.map((el) => {
@@ -149,9 +242,14 @@ class Main extends Component {
               id={el.id}
               educationValues={educationValues}
               onEducationChange={this.onEducationChange}
+              onEducationEdit={this.onEducationEdit}
+              onDeleteEducation={this.onDeleteEducation}
             />
           );
         })}
+        <button type="button" onClick={this.onAddEducation}>
+          Add
+        </button>
         <h2>Work Experience</h2>
         {experienceValues.map((el) => {
           return (
@@ -160,9 +258,14 @@ class Main extends Component {
               id={el.id}
               experienceValues={experienceValues}
               onExperienceChange={this.onExperienceChange}
+              onExperienceEdit={this.onExperienceEdit}
+              onDeleteExperience={this.onDeleteExperience}
             />
           );
         })}
+        <button type="button" onClick={this.onAddExperience}>
+          Add
+        </button>
         <button type="submit" onClick={this.onSubmit}>
           Submit
         </button>

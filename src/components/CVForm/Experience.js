@@ -3,7 +3,13 @@ import React from "react";
 import uniqid from "uniqid";
 
 function Experience(props) {
-  const { id, experienceValues, onExperienceChange } = props;
+  const {
+    id,
+    experienceValues,
+    onExperienceChange,
+    onExperienceEdit,
+    onDeleteExperience,
+  } = props;
   const experience = experienceValues.filter((el) => el.id === id)[0];
   const experienceArr = Object.entries(experience);
 
@@ -14,6 +20,24 @@ function Experience(props) {
           {experienceArr.slice(1).map((el) => (
             <p key={uniqid()}>{el[1]}</p>
           ))}
+          <button
+            type="button"
+            onClick={() => {
+              onExperienceEdit(id);
+            }}
+          >
+            Edit
+          </button>
+          {experienceValues.length > 1 && (
+            <button
+              type="button"
+              onClick={() => {
+                onDeleteExperience(id);
+              }}
+            >
+              Delete
+            </button>
+          )}
         </div>
       ) : (
         <form>

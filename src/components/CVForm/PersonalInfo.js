@@ -3,7 +3,8 @@ import React from "react";
 import uniqid from "uniqid";
 
 function PersonalInfo(props) {
-  const { personalInfoValues, onPersonalInfoChange } = props;
+  const { personalInfoValues, onPersonalInfoChange, onPersonalInfoEdit } =
+    props;
   const personalInfo = personalInfoValues[0];
   const personalInfoArr = Object.entries(personalInfo);
 
@@ -14,6 +15,9 @@ function PersonalInfo(props) {
           {personalInfoArr.slice(1).map((el) => (
             <p key={uniqid()}>{el[1]}</p>
           ))}
+          <button type="button" onClick={onPersonalInfoEdit}>
+            Edit
+          </button>
         </div>
       ) : (
         <form>
