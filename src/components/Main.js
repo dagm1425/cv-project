@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import uniqid from "uniqid";
-import PersonalInfo from "./CVForm/PersonalInfo";
-import Education from "./CVForm/Education";
-import Experience from "./CVForm/Experience";
+import FormPreview from "./CVForm/FormPreview";
+import FormInput from "./CVForm/FormInput";
 
 class Main extends Component {
   constructor(props) {
@@ -14,7 +13,6 @@ class Main extends Component {
           name: "",
           email: "",
           phoneNumber: "",
-          submission: false,
         },
       ],
       educationValues: [
@@ -24,7 +22,6 @@ class Main extends Component {
           nameOfEducationalInstitution: "",
           from: "",
           to: "",
-          submission: false,
         },
       ],
       experienceValues: [
@@ -35,9 +32,9 @@ class Main extends Component {
           from: "",
           to: "",
           mainResponsibilities: "",
-          submission: false,
         },
       ],
+      isSubmitted: false,
     };
   }
 
@@ -51,7 +48,6 @@ class Main extends Component {
         nameOfEducationalInstitution: "",
         from: "",
         to: "",
-        submission: false,
       }),
     });
   };
@@ -75,7 +71,6 @@ class Main extends Component {
         from: "",
         to: "",
         mainResponsibilities: "",
-        submission: false,
       }),
     });
   };
@@ -139,139 +134,54 @@ class Main extends Component {
     });
   };
 
-  onPersonalInfoEdit = () => {
-    const { personalInfoValues } = this.state;
-
+  onEdit = () => {
     this.setState({
-      personalInfoValues: personalInfoValues.map((el) => {
-        return {
-          ...el,
-          submission: false,
-        };
-      }),
-    });
-  };
-
-  onEducationEdit = (id) => {
-    const { educationValues } = this.state;
-
-    this.setState({
-      educationValues: educationValues.map((el) => {
-        if (el.id === id) {
-          return {
-            ...el,
-            submission: false,
-          };
-        }
-        return el;
-      }),
-    });
-  };
-
-  onExperienceEdit = (id) => {
-    const { experienceValues } = this.state;
-
-    this.setState({
-      experienceValues: experienceValues.map((el) => {
-        if (el.id === id) {
-          return {
-            ...el,
-            submission: false,
-          };
-        }
-        return el;
-      }),
+      isSubmitted: false,
     });
   };
 
   onSubmit = (e) => {
     e.preventDefault();
-
-    const { educationValues, personalInfoValues, experienceValues } =
-      this.state;
-
     this.setState({
-      educationValues: educationValues.map((el) => {
-        if (!el.submission) {
-          return {
-            ...el,
-            submission: true,
-          };
-        }
-        return el;
-      }),
-
-      personalInfoValues: personalInfoValues.map((el) => {
-        if (!el.submission) {
-          return {
-            ...el,
-            submission: true,
-          };
-        }
-        return el;
-      }),
-      experienceValues: experienceValues.map((el) => {
-        if (!el.submission) {
-          return {
-            ...el,
-            submission: true,
-          };
-        }
-        return el;
-      }),
+      isSubmitted: true,
     });
   };
 
   render() {
-    const { personalInfoValues, educationValues, experienceValues } =
-      this.state;
+    const {
+      personalInfoValues,
+      educationValues,
+      experienceValues,
+      isSubmitted,
+    } = this.state;
 
-    return (
+    return isSubmitted ? (
       <div>
-        <h2>Personal Information</h2>
-        <PersonalInfo
+        <FormPreview
           personalInfoValues={personalInfoValues}
-          onPersonalInfoChange={this.onPersonalInfoChange}
-          onPersonalInfoEdit={this.onPersonalInfoEdit}
+          educationValues={educationValues}
+          experienceValues={experienceValues}
+          isSubmitted={isSubmitted}
+          onDeleteEducation={this.onDeleteEducation}
+          onDeleteExperience={this.onDeleteExperience}
+          onEdit={this.onEdit}
         />
-        <h2>Education</h2>
-        {educationValues.map((el) => {
-          return (
-            <Education
-              key={el.id}
-              id={el.id}
-              educationValues={educationValues}
-              onEducationChange={this.onEducationChange}
-              onEducationEdit={this.onEducationEdit}
-              onDeleteEducation={this.onDeleteEducation}
-            />
-          );
-        })}
-        <button type="button" onClick={this.onAddEducation}>
-          Add
-        </button>
-        <h2>Work Experience</h2>
-        {experienceValues.map((el) => {
-          return (
-            <Experience
-              key={el.id}
-              id={el.id}
-              experienceValues={experienceValues}
-              onExperienceChange={this.onExperienceChange}
-              onExperienceEdit={this.onExperienceEdit}
-              onDeleteExperience={this.onDeleteExperience}
-            />
-          );
-        })}
-        <button type="button" onClick={this.onAddExperience}>
-          Add
-        </button>
-        <button type="submit" onClick={this.onSubmit}>
-          Submit
-        </button>
       </div>
+    ) : (
+      <form onSubmit={this.onSubmit}>
+        <FormInput
+          personalInfoValues={personalInfoValues}
+          educationValues={educationValues}
+          experienceValues={experienceValues}
+          isSubmitted={isSubmitted}
+          onPersonalInfoChange={this.onPersonalInfoChange}
+          onEducationChange={this.onEducationChange}
+          onExperienceChange={this.onExperienceChange}
+          onAddEducation={this.onAddEducation}
+          onAddExperience={this.onAddExperience}
+        />
+      </form>
     );
   }
 }
-
 export default Main;
