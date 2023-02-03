@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 
-function EducationInput(props) {
+export default function EducationInput(props) {
   const { id, educationValues, onEducationChange } = props;
   const education = educationValues.filter((el) => el.id === id)[0];
 
@@ -46,5 +46,3 @@ function EducationInput(props) {
     </div>
   );
 }
-
-export default EducationInput;

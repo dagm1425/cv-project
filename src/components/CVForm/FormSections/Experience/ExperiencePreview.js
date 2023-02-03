@@ -2,7 +2,7 @@
 import React from "react";
 import uniqid from "uniqid";
 
-function Experience(props) {
+export default function ExperiencePreview(props) {
   const { id, experienceValues, onDeleteExperience } = props;
   const experience = experienceValues.filter((el) => el.id === id)[0];
   const experienceArr = Object.entries(experience);
@@ -25,5 +25,3 @@ function Experience(props) {
     </div>
   );
 }
-
-export default Experience;

@@ -2,7 +2,7 @@
 import React from "react";
 import uniqid from "uniqid";
 
-function Education(props) {
+export default function EducationPreview(props) {
   const { id, educationValues, onDeleteEducation } = props;
   const education = educationValues.filter((el) => el.id === id)[0];
   const educationArr = Object.entries(education);
@@ -26,5 +26,3 @@ function Education(props) {
     </div>
   );
 }
-
-export default Education;

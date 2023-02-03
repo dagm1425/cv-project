@@ -2,7 +2,7 @@
 import React from "react";
 import uniqid from "uniqid";
 
-function PersonalInfo(props) {
+export default function PersonalInfoPreview(props) {
   const { personalInfoValues } = props;
   const personalInfo = personalInfoValues[0];
   const personalInfoArr = Object.entries(personalInfo);
@@ -15,5 +15,3 @@ function PersonalInfo(props) {
     </div>
   );
 }
-
-export default PersonalInfo;

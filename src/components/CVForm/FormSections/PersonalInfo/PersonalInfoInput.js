@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 
-function PersonalInfo(props) {
+export default function PersonalInfoInput(props) {
   const { personalInfoValues, onPersonalInfoChange } = props;
   const personalInfo = personalInfoValues[0];
 
@@ -34,5 +34,3 @@ function PersonalInfo(props) {
     </div>
   );
 }
-
-export default PersonalInfo;

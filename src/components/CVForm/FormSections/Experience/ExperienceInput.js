@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 
-function Experience(props) {
+export default function ExperienceInput(props) {
   const { id, experienceValues, onExperienceChange } = props;
   const experience = experienceValues.filter((el) => el.id === id)[0];
 
@@ -56,5 +56,3 @@ function Experience(props) {
     </div>
   );
 }
-
-export default Experience;
