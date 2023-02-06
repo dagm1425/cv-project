@@ -149,7 +149,7 @@ export default function Main() {
       />
     </div>
   ) : (
-    <form onSubmit={onSubmit}>
+    <div>
       <FormInput
         personalInfoValues={personalInfoValues}
         educationValues={educationValues}
@@ -160,7 +160,8 @@ export default function Main() {
         onExperienceChange={onExperienceChange}
         onAddEducation={onAddEducation}
         onAddExperience={onAddExperience}
+        onSubmit={onSubmit}
       />
-    </form>
+    </div>
   );
 }

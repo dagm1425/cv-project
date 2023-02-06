@@ -15,10 +15,11 @@ export default function FormInput(props) {
     onExperienceChange,
     onAddEducation,
     onAddExperience,
+    onSubmit,
   } = props;
 
   return (
-    <div>
+    <form onSubmit={onSubmit}>
       <h2>Personal Information</h2>
       <PersonalInfoInput
         personalInfoValues={personalInfoValues}
@@ -56,6 +57,6 @@ export default function FormInput(props) {
         Add
       </button>
       <button type="submit">Submit</button>
-    </div>
+    </form>
   );
 }
