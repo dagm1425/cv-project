@@ -1,54 +1,67 @@
+/* eslint-disable react/prefer-stateless-function */
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { Component } from "react";
 import PersonalInfoPreview from "./FormSections/PersonalInfo/PersonalInfoPreview";
 import EducationPreview from "./FormSections/Education/EducationPreview";
 import ExperiencePreview from "./FormSections/Experience/ExperiencePreview";
 
-export default function FormPreview(props) {
-  const {
-    personalInfoValues,
-    educationValues,
-    experienceValues,
-    isSubmitted,
-    onDeleteEducation,
-    onDeleteExperience,
-    onEdit,
-  } = props;
+export default class FormPreview extends Component {
+  render() {
+    const {
+      personalInfoValues,
+      educationValues,
+      experienceValues,
+      isSubmitted,
+      onDeleteEducation,
+      onDeleteExperience,
+      onEdit,
+    } = this.props;
 
-  return (
-    <div>
-      <h2>Personal Information</h2>
-      <PersonalInfoPreview
-        personalInfoValues={personalInfoValues}
-        isSubmitted={isSubmitted}
-      />
-      <h2>Education</h2>
-      {educationValues.map((el) => {
-        return (
-          <EducationPreview
-            key={el.id}
-            id={el.id}
-            educationValues={educationValues}
+    return (
+      <div>
+        <div className="form__section">
+          <h2 className="form__header">Personal Information</h2>
+          <PersonalInfoPreview
+            personalInfoValues={personalInfoValues}
             isSubmitted={isSubmitted}
-            onDeleteEducation={onDeleteEducation}
           />
-        );
-      })}
-      <h2>Work Experience</h2>
-      {experienceValues.map((el) => {
-        return (
-          <ExperiencePreview
-            key={el.id}
-            id={el.id}
-            experienceValues={experienceValues}
-            isSubmitted={isSubmitted}
-            onDeleteExperience={onDeleteExperience}
-          />
-        );
-      })}
-      <button type="button" onClick={onEdit}>
-        Edit
-      </button>
-    </div>
-  );
+        </div>
+        <div className="form__section">
+          <h2 className="form__header">Education</h2>
+          {educationValues.map((el) => {
+            return (
+              <EducationPreview
+                key={el.id}
+                id={el.id}
+                educationValues={educationValues}
+                isSubmitted={isSubmitted}
+                onDeleteEducation={onDeleteEducation}
+              />
+            );
+          })}
+        </div>
+        <div className="form__section">
+          <h2 className="form__header">Work Experience</h2>
+          {experienceValues.map((el) => {
+            return (
+              <ExperiencePreview
+                key={el.id}
+                id={el.id}
+                experienceValues={experienceValues}
+                isSubmitted={isSubmitted}
+                onDeleteExperience={onDeleteExperience}
+              />
+            );
+          })}
+        </div>
+        <button
+          className="form__btn form__btn--l"
+          type="button"
+          onClick={onEdit}
+        >
+          Edit
+        </button>
+      </div>
+    );
+  }
 }

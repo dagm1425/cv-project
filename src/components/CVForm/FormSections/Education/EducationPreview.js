@@ -8,7 +8,7 @@ export default function EducationPreview(props) {
   const educationArr = Object.entries(education);
 
   return (
-    <div>
+    <div className="preview__group">
       {educationArr.slice(1).map((el) => (
         <p key={uniqid()}>{el[1]}</p>
       ))}
@@ -16,6 +16,7 @@ export default function EducationPreview(props) {
       {educationValues.length > 1 && (
         <button
           type="button"
+          className="form__btn form__btn--s form__btn--delete"
           onClick={() => {
             onDeleteEducation(id);
           }}

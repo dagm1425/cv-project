@@ -8,7 +8,7 @@ export default function PersonalInfoPreview(props) {
   const personalInfoArr = Object.entries(personalInfo);
 
   return (
-    <div>
+    <div className="preview__group">
       {personalInfoArr.slice(1).map((el) => (
         <p key={uniqid()}>{el[1]}</p>
       ))}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../styles.css";
 import uniqid from "uniqid";
 import FormPreview from "./CVForm/FormPreview";
 import FormInput from "./CVForm/FormInput";
@@ -7,7 +8,7 @@ export default function Main() {
   const [personalInfoValues, setPersonalInfoValues] = useState([
     {
       id: uniqid(),
-      name: "",
+      fullName: "",
       email: "",
       phoneNumber: "",
     },
@@ -137,7 +138,7 @@ export default function Main() {
   };
 
   return isSubmitted ? (
-    <div>
+    <div className="content">
       <FormPreview
         personalInfoValues={personalInfoValues}
         educationValues={educationValues}
@@ -149,7 +150,7 @@ export default function Main() {
       />
     </div>
   ) : (
-    <div>
+    <div className="content">
       <FormInput
         personalInfoValues={personalInfoValues}
         educationValues={educationValues}
@@ -160,6 +161,8 @@ export default function Main() {
         onExperienceChange={onExperienceChange}
         onAddEducation={onAddEducation}
         onAddExperience={onAddExperience}
+        onDeleteEducation={onDeleteEducation}
+        onDeleteExperience={onDeleteExperience}
         onSubmit={onSubmit}
       />
     </div>
