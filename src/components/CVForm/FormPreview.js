@@ -15,6 +15,7 @@ export default class FormPreview extends Component {
       onDeleteEducation,
       onDeleteExperience,
       onEdit,
+      onPrint,
     } = this.props;
 
     return (
@@ -60,6 +61,13 @@ export default class FormPreview extends Component {
           onClick={onEdit}
         >
           Edit
+        </button>
+        <button
+          className="form__btn form__btn--l form__btn--print"
+          type="button"
+          onClick={onPrint}
+        >
+          Print
         </button>
       </div>
     );

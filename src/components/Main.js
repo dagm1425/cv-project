@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "../styles.css";
 import uniqid from "uniqid";
+import { useReactToPrint } from "react-to-print";
 import FormPreview from "./CVForm/FormPreview";
 import FormInput from "./CVForm/FormInput";
 
@@ -137,9 +138,15 @@ export default function Main() {
     setIsubmitted(true);
   };
 
+  const componentRef = useRef();
+
+  // throws warning because react-to-print uses findDOMNode
+  const onPrint = useReactToPrint({ content: () => componentRef.current });
+
   return isSubmitted ? (
     <div className="content">
       <FormPreview
+        ref={componentRef}
         personalInfoValues={personalInfoValues}
         educationValues={educationValues}
         experienceValues={experienceValues}
@@ -147,6 +154,7 @@ export default function Main() {
         onDeleteEducation={onDeleteEducation}
         onDeleteExperience={onDeleteExperience}
         onEdit={onEdit}
+        onPrint={onPrint}
       />
     </div>
   ) : (
