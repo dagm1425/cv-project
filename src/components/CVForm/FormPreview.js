@@ -16,10 +16,12 @@ export default class FormPreview extends Component {
       onDeleteExperience,
       onEdit,
       onPrint,
+      getPageMargins,
     } = this.props;
 
     return (
       <div>
+        <style>{getPageMargins()}</style>
         <div className="form__section">
           <h2 className="form__header">Personal Information</h2>
           <PersonalInfoPreview

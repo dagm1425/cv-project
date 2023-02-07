@@ -143,9 +143,14 @@ export default function Main() {
   // throws warning because react-to-print uses findDOMNode
   const onPrint = useReactToPrint({ content: () => componentRef.current });
 
+  const getPageMargins = () => {
+    return `@page { margin: 6rem 0 0 8rem !important; }`;
+  };
+
   return isSubmitted ? (
     <div className="content">
       <FormPreview
+        getPageMargins={getPageMargins}
         ref={componentRef}
         personalInfoValues={personalInfoValues}
         educationValues={educationValues}
